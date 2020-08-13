@@ -3,17 +3,21 @@ import javax.swing.*;
 
 public class MainWindow {
     public static void main(String[] args) throws Exception {
-        JFrame f=new JFrame();//creating instance of JFrame
+        JFrame f=new JFrame();
 
-        JButton b=new JButton("click");//creating instance of JButton
-        b.setBounds(130,100,100, 40);//x axis, y axis, width, height
+        JTextArea searchBar = new JTextArea("Type Here!");
+        searchBar.setBounds(10,10,500,20);
 
-        f.add(b);//adding button in JFrame
+        JButton b=new JButton("click");
+        b.setBounds(20,100,500, 500);
 
-        f.setSize(400,500);//400 width and 500 height
-        f.setLayout(null);//using no layout managers
-        f.setVisible(true);//making the frame visible
-        System.out.println(Api.gWeather("velenje"));
+        f.add(b);
+        f.add(searchBar);
+
+        f.setSize(540,360);
+        f.setLayout(null);
+        f.setVisible(true);
+        //System.out.println(Api.gWeatherByLocation("velenje"));
 
     }
 }

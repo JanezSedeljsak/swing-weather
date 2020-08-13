@@ -5,10 +5,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class Api {
-    public static String gWeather(String location) throws Exception {
-        String url = "http://api.ipinfodb.com/v3/ip-city/?key=d64fcfdfacc213c7ddf4ef911dfe97b55e4696be3532bf8302876c09ebd06b&ip=74.125.45.100&format=json";
-        URL obj = new URL(url);
+class APIHelper {
+    public static String get_(String uri) throws  Exception {
+        URL obj = new URL(uri);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestMethod("GET");
         BufferedReader in = new BufferedReader(
@@ -20,5 +19,19 @@ public class Api {
         }
         in.close();
         return response.toString();
+    }
+}
+
+public class Api {
+    public static String API_KEY = "70ef7d1ecc959f4ef1a91a8a4ab7a914";
+
+    public static String gWeatherByLocation(String location) throws Exception {
+        String uri = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=" + Api.API_KEY;
+        return APIHelper.get_(uri);
+    }
+
+    public static String gWeatherByGeoLocation(String latitude, String longitude)  throws Exception {
+        String uri = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=metric&appid=" + Api.API_KEY;
+        return APIHelper.get_(uri);
     }
 }
