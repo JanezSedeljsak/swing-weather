@@ -13,7 +13,7 @@ public class Api {
         return Helpers.API_GET(uri);
     }
 
-    public static String gWeatherByGeoLocation(String latitude, String longitude)  throws Exception {
+    public static String gWeatherByGeoLocation(Double latitude, Double longitude)  throws Exception {
         String uri = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=metric&appid=" + Api.API_KEY;
         return Helpers.API_GET(uri);
     }

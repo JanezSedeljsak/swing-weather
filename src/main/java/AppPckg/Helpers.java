@@ -1,5 +1,7 @@
 package AppPckg;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -11,6 +13,7 @@ interface ArrowFunction  {
 }
 
 public class Helpers {
+
     public static String API_GET(String uri) throws Exception {
         URL obj = new URL(uri);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -24,6 +27,12 @@ public class Helpers {
         }
         in.close();
         return response.toString();
+    }
+
+    public static void showMessageDialog(Component parentComponent, Object message){
+        JOptionPane pane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
+        JDialog dialog = pane.createDialog(parentComponent, null);
+        dialog.setVisible(true);
     }
 
     public static void WRITE_TO_DB(String query) throws  Exception {

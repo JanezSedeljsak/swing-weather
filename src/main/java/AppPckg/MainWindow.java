@@ -16,32 +16,22 @@ public class MainWindow {
         searchBar.setBounds(10,30,500,30);
         searchBar.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        JButton curLocButton = new JButton("Vreme na trenutni lokaciji");
-        curLocButton.setBounds(10,70,500, 25);
-        curLocButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                WeatherWindow.display();
-            }
-        });
-
         JButton historyButton = new JButton("Zgodovina iskanja");
-        historyButton.setBounds(10, 110, 500, 30);
+        historyButton.setBounds(10, 70, 500, 30);
         historyButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 HistoryWindow.display();
             }
         });
 
-
         JButton b = new JButton("click");
         b.setBounds(10,60,500, 30);
 
-        f.add(curLocButton);
         f.add(searchBar);
         f.add(searchLabel);
         f.add(historyButton);
 
-        f.setSize(540,200);
+        f.setSize(540,160);
         f.setLayout(null);
         f.setVisible(true);
         f.setTitle("App za vreme");

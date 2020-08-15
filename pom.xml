@@ -10,9 +10,9 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.vincenzopalazzo</groupId>
-            <artifactId>material-ui-swing</artifactId>
-            <version>VERSION</version>
+            <groupId>io.ipgeolocation</groupId>
+            <artifactId>ipgeolocation</artifactId>
+            <version>1.0.12</version>
         </dependency>
     </dependencies>
 
