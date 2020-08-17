@@ -1,10 +1,5 @@
 package AppPckg;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class Api {
     public static String API_KEY = "70ef7d1ecc959f4ef1a91a8a4ab7a914";
 

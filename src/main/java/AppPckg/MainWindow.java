@@ -30,8 +30,9 @@ public class MainWindow {
                 // enter pressed
                 if (e.getKeyCode() == 10) {
                     try {
-                        System.out.println(Api.gWeatherByLocation(searchBar.getText()));
+                        String response = Api.gWeatherByLocation(searchBar.getText());
                         searchBar.setText("");
+                        WeatherWindow.display(response);
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
