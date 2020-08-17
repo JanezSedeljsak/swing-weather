@@ -10,7 +10,9 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.Date;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
@@ -47,7 +49,7 @@ public class SQL {
         }
     }
 
-    public static Object gSearchById(int id) {
+    public static Dictionary gHsitoryById(int id) {
 
         String sql = new StringBuffer()
                 .append("SELECT * FROM history")
@@ -60,7 +62,7 @@ public class SQL {
              Statement stmt  = conn.createStatement();
              ResultSet result    = stmt.executeQuery(sql)){
             if(result.next()) {
-                return "vreme";
+                return new Hashtable();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -69,8 +71,23 @@ public class SQL {
         return null;
     }
 
-    public static Object gHistory() {
-        return null;
+    public static List<String[]> gHistory() {
+        String sql = "SELECT id, title, stamp FROM history ORDER BY id DESC";
+
+        List<String[]> rows = new ArrayList<String[]>();
+
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+             Statement stmt  = conn.createStatement();
+             ResultSet result    = stmt.executeQuery(sql)){
+            while (result.next()) {
+                String row[] = {String.valueOf(result.getInt("id")), result.getString("title"), result.getString("stamp")};
+                rows.add(row);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return rows;
     }
 
     public static boolean createNewRecord(String weatherData) throws SQLException, ClassNotFoundException, ParseException {
