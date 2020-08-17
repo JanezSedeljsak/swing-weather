@@ -5,7 +5,9 @@ public class Api {
 
     public static String gWeatherByLocation(String location) throws Exception {
         String uri = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=metric&appid=" + Api.API_KEY;
-        return Helpers.API_GET(uri);
+        String result = Helpers.API_GET(uri);
+        SQL.createNewRecord(result);
+        return result;
     }
 
     public static String gWeatherByGeoLocation(Double latitude, Double longitude)  throws Exception {

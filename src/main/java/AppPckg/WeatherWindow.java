@@ -22,8 +22,7 @@ public class WeatherWindow {
         }
 
         JSONParser parser = new JSONParser();
-        JSONObject data;
-        data = (JSONObject) parser.parse(weatherResponse);
+        JSONObject data = (JSONObject) parser.parse(weatherResponse);
 
         JLabel locationLabel = new JLabel();
         locationLabel.setText("<html><h1>Vreme za: " + (String)data.get("name") + "</h1></html>");

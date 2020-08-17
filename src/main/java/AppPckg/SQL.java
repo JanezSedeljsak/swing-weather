@@ -1,5 +1,8 @@
 package AppPckg;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +11,9 @@ import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
 
 public class SQL {
 
@@ -26,6 +32,7 @@ public class SQL {
         tables[0] = new StringBuilder()
                 .append("CREATE TABLE IF NOT EXISTS `history`")
                 .append("( `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,")
+                .append("`title` TEXT NOT NULL,")
                 .append("`data` TEXT NOT NULL,")
                 .append("`stamp` TEXT NOT NULL)")
                 .toString();
@@ -66,7 +73,20 @@ public class SQL {
         return null;
     }
 
-    public static boolean writeToDB() {
-        return true;
+    public static boolean createNewRecord(String weatherData) throws SQLException, ClassNotFoundException, ParseException {
+        Class.forName("org.sqlite.JDBC");
+        Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
+        JSONParser parser = new JSONParser();
+        JSONObject data = (JSONObject) parser.parse(weatherData);
+        String title = (String) data.get("name");
+        String sql = "INSERT INTO history (data, title, stamp) VALUES ('"+weatherData+"', '" + title + "', '"+java.time.LocalDate.now().toString()+"')";
+        try(Statement stmt = conn.createStatement()) {
+            stmt.execute(sql);
+            conn.close();
+            return true;
+        } catch (SQLException e) {
+            conn.close();
+            return false;
+        }
     }
 }
