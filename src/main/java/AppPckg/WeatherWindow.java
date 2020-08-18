@@ -11,6 +11,7 @@ import org.json.simple.parser.*;
 public class WeatherWindow {
     public static void display(Object... params) throws Exception {
         JFrame f = new JFrame();
+        String title = "Trenutno vreme";
         String weatherSearchDate = java.time.LocalDate.now().toString();
         String weatherResponse = "";
         if (params.length == 0) {
@@ -23,6 +24,7 @@ public class WeatherWindow {
             Dictionary historyResult = SQL.gHsitoryById(historyIndex);
             weatherResponse = (String)historyResult.get("data");
             weatherSearchDate = (String)historyResult.get("stamp");
+            title = "Vreme iz zgodovine";
         }
 
         JSONParser parser = new JSONParser();
@@ -55,7 +57,7 @@ public class WeatherWindow {
         f.setSize(540, 200);
         f.setLayout(null);
         f.setVisible(true);
-        f.setTitle("Vreme");
+        f.setTitle(title);
         f.setLocationRelativeTo(null);
     }
 }

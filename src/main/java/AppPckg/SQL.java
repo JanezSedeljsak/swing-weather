@@ -50,25 +50,24 @@ public class SQL {
     }
 
     public static Dictionary gHsitoryById(int id) {
-
+        Dictionary data = new Hashtable();
         String sql = new StringBuffer()
-                .append("SELECT * FROM history")
-                .append("WHERE id = '")
+                .append("SELECT * FROM history WHERE id = ")
                 .append(id)
-                .append("';")
                 .toString();
 
         try (Connection conn = DriverManager.getConnection("jdbc:sqlite:database.db");
              Statement stmt  = conn.createStatement();
              ResultSet result    = stmt.executeQuery(sql)){
             if(result.next()) {
-                return new Hashtable();
+                data.put("data", result.getString("data"));
+                data.put("stamp", result.getString("stamp"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
 
-        return null;
+        return data;
     }
 
     public static List<String[]> gHistory() {
